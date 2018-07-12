@@ -1,0 +1,434 @@
+
+white_LFR.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000126  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .debug_aranges 00000020  00000000  00000000  0000017a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  2 .debug_pubnames 0000005d  00000000  00000000  0000019a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   000001d0  00000000  00000000  000001f7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 000000ae  00000000  00000000  000003c7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   0000026f  00000000  00000000  00000475  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000080  00000000  00000000  000006e4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    00000095  00000000  00000000  00000764  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_loc    00000029  00000000  00000000  000007f9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_ranges 00000060  00000000  00000000  00000822  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	19 c0       	rjmp	.+50     	; 0x36 <__bad_interrupt>
+   4:	18 c0       	rjmp	.+48     	; 0x36 <__bad_interrupt>
+   6:	17 c0       	rjmp	.+46     	; 0x36 <__bad_interrupt>
+   8:	16 c0       	rjmp	.+44     	; 0x36 <__bad_interrupt>
+   a:	15 c0       	rjmp	.+42     	; 0x36 <__bad_interrupt>
+   c:	14 c0       	rjmp	.+40     	; 0x36 <__bad_interrupt>
+   e:	13 c0       	rjmp	.+38     	; 0x36 <__bad_interrupt>
+  10:	12 c0       	rjmp	.+36     	; 0x36 <__bad_interrupt>
+  12:	11 c0       	rjmp	.+34     	; 0x36 <__bad_interrupt>
+  14:	10 c0       	rjmp	.+32     	; 0x36 <__bad_interrupt>
+  16:	0f c0       	rjmp	.+30     	; 0x36 <__bad_interrupt>
+  18:	0e c0       	rjmp	.+28     	; 0x36 <__bad_interrupt>
+  1a:	0d c0       	rjmp	.+26     	; 0x36 <__bad_interrupt>
+  1c:	0c c0       	rjmp	.+24     	; 0x36 <__bad_interrupt>
+  1e:	0b c0       	rjmp	.+22     	; 0x36 <__bad_interrupt>
+  20:	0a c0       	rjmp	.+20     	; 0x36 <__bad_interrupt>
+  22:	09 c0       	rjmp	.+18     	; 0x36 <__bad_interrupt>
+  24:	08 c0       	rjmp	.+16     	; 0x36 <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+  32:	14 d0       	rcall	.+40     	; 0x5c <main>
+  34:	76 c0       	rjmp	.+236    	; 0x122 <_exit>
+
+00000036 <__bad_interrupt>:
+  36:	e4 cf       	rjmp	.-56     	; 0x0 <__vectors>
+
+00000038 <hleft>:
+#include<avr/io.h>
+#include<util/delay.h>
+
+void hleft(void)
+{
+	PORTC=0b00000110;
+  38:	86 e0       	ldi	r24, 0x06	; 6
+  3a:	85 bb       	out	0x15, r24	; 21
+}
+  3c:	08 95       	ret
+
+0000003e <hright>:
+
+void hright(void)
+{
+	PORTC=0b00001001;
+  3e:	89 e0       	ldi	r24, 0x09	; 9
+  40:	85 bb       	out	0x15, r24	; 21
+}
+  42:	08 95       	ret
+
+00000044 <foreward>:
+
+void foreward(void)
+{
+	PORTC=0b00001010;
+  44:	8a e0       	ldi	r24, 0x0A	; 10
+  46:	85 bb       	out	0x15, r24	; 21
+}
+  48:	08 95       	ret
+
+0000004a <left>:
+
+void left(void)
+{
+	PORTC=0b00000010;
+  4a:	82 e0       	ldi	r24, 0x02	; 2
+  4c:	85 bb       	out	0x15, r24	; 21
+}
+  4e:	08 95       	ret
+
+00000050 <right>:
+
+void right(void)
+{
+	PORTC=0b00001000;
+  50:	88 e0       	ldi	r24, 0x08	; 8
+  52:	85 bb       	out	0x15, r24	; 21
+}
+  54:	08 95       	ret
+
+00000056 <backward>:
+
+void backward(void)
+{
+	PORTC=0b00000101;
+  56:	85 e0       	ldi	r24, 0x05	; 5
+  58:	85 bb       	out	0x15, r24	; 21
+}
+  5a:	08 95       	ret
+
+0000005c <main>:
+
+main()
+{
+	DDRB=0B00000000;	 // array--> i/p
+  5c:	17 ba       	out	0x17, r1	; 23
+	DDRD=0B00000000;	 // Sensor
+  5e:	11 ba       	out	0x11, r1	; 17
+	DDRC=0B11111111;	 // led--> o/p 
+  60:	8f ef       	ldi	r24, 0xFF	; 255
+  62:	84 bb       	out	0x14, r24	; 20
+  64:	40 e0       	ldi	r20, 0x00	; 0
+  66:	81 e0       	ldi	r24, 0x01	; 1
+  68:	90 e0       	ldi	r25, 0x00	; 0
+#include<avr/io.h>
+#include<util/delay.h>
+
+void hleft(void)
+{
+	PORTC=0b00000110;
+  6a:	f6 e0       	ldi	r31, 0x06	; 6
+}
+
+void hright(void)
+{
+	PORTC=0b00001001;
+  6c:	e9 e0       	ldi	r30, 0x09	; 9
+
+main()
+{
+	DDRB=0B00000000;	 // array--> i/p
+	DDRD=0B00000000;	 // Sensor
+	DDRC=0B11111111;	 // led--> o/p 
+  6e:	62 e0       	ldi	r22, 0x02	; 2
+	PORTC=0b00000010;
+}
+
+void right(void)
+{
+	PORTC=0b00001000;
+  70:	58 e0       	ldi	r21, 0x08	; 8
+	PORTC=0b00001001;
+}
+
+void foreward(void)
+{
+	PORTC=0b00001010;
+  72:	7a e0       	ldi	r23, 0x0A	; 10
+  74:	03 c0       	rjmp	.+6      	; 0x7c <main+0x20>
+
+main()
+{
+	DDRB=0B00000000;	 // array--> i/p
+	DDRD=0B00000000;	 // Sensor
+	DDRC=0B11111111;	 // led--> o/p 
+  76:	42 e0       	ldi	r20, 0x02	; 2
+  78:	80 e0       	ldi	r24, 0x00	; 0
+  7a:	90 e0       	ldi	r25, 0x00	; 0
+	int m=1;	// 1 is WLF
+
+	while (1) 
+	{
+		
+		y= PIND & 0b11000000;
+  7c:	30 b3       	in	r19, 0x10	; 16
+  7e:	30 7c       	andi	r19, 0xC0	; 192
+		x= PINB & 0B00000111; //read i/p with masking unused bits 
+  80:	26 b3       	in	r18, 0x16	; 22
+  82:	27 70       	andi	r18, 0x07	; 7
+		
+		if (y==0)
+  84:	33 23       	and	r19, r19
+  86:	19 f4       	brne	.+6      	; 0x8e <main+0x32>
+  88:	81 e0       	ldi	r24, 0x01	; 1
+  8a:	90 e0       	ldi	r25, 0x00	; 0
+  8c:	05 c0       	rjmp	.+10     	; 0x98 <main+0x3c>
+			m=1;
+
+		else if (y==0b11000000)
+  8e:	30 3c       	cpi	r19, 0xC0	; 192
+  90:	21 f1       	breq	.+72     	; 0xda <main+0x7e>
+			m=0;
+
+		if (m==1)	//WLF
+  92:	81 30       	cpi	r24, 0x01	; 1
+  94:	91 05       	cpc	r25, r1
+  96:	f9 f4       	brne	.+62     	; 0xd6 <main+0x7a>
+
+		{
+			if(x==0b00000010  ) 	
+  98:	22 30       	cpi	r18, 0x02	; 2
+  9a:	11 f4       	brne	.+4      	; 0xa0 <main+0x44>
+	PORTC=0b00001001;
+}
+
+void foreward(void)
+{
+	PORTC=0b00001010;
+  9c:	75 bb       	out	0x15, r23	; 21
+  9e:	0b c0       	rjmp	.+22     	; 0xb6 <main+0x5a>
+
+		{
+			if(x==0b00000010  ) 	
+				foreward();
+	
+			else if(x==0b000000110)
+  a0:	26 30       	cpi	r18, 0x06	; 6
+  a2:	11 f0       	breq	.+4      	; 0xa8 <main+0x4c>
+				left();
+	
+			else if(x==0b00000100)
+  a4:	24 30       	cpi	r18, 0x04	; 4
+  a6:	11 f4       	brne	.+4      	; 0xac <main+0x50>
+	PORTC=0b00001010;
+}
+
+void left(void)
+{
+	PORTC=0b00000010;
+  a8:	65 bb       	out	0x15, r22	; 21
+  aa:	05 c0       	rjmp	.+10     	; 0xb6 <main+0x5a>
+				left();
+	
+			else if(x==0b00000100)
+				left();
+		
+			else if(x==0b000000011)
+  ac:	23 30       	cpi	r18, 0x03	; 3
+  ae:	11 f0       	breq	.+4      	; 0xb4 <main+0x58>
+				right();
+	
+			else if(x==0b00000001)
+  b0:	21 30       	cpi	r18, 0x01	; 1
+  b2:	09 f4       	brne	.+2      	; 0xb6 <main+0x5a>
+	PORTC=0b00000010;
+}
+
+void right(void)
+{
+	PORTC=0b00001000;
+  b4:	55 bb       	out	0x15, r21	; 21
+				right();
+	
+			else if(x==0b00000001)
+				right();
+			
+			if(y==0b10000000)	//acute check right
+  b6:	30 38       	cpi	r19, 0x80	; 128
+  b8:	11 f4       	brne	.+4      	; 0xbe <main+0x62>
+  ba:	41 e0       	ldi	r20, 0x01	; 1
+  bc:	df cf       	rjmp	.-66     	; 0x7c <main+0x20>
+				k=1;
+
+			else if(y==0b01000000)	//acute check left
+  be:	30 34       	cpi	r19, 0x40	; 64
+  c0:	71 f1       	breq	.+92     	; 0x11e <main+0xc2>
+				k=2;
+			
+			else if(x==0b00000000)
+  c2:	22 23       	and	r18, r18
+  c4:	d9 f6       	brne	.-74     	; 0x7c <main+0x20>
+			{
+				if (k==1)	
+  c6:	41 30       	cpi	r20, 0x01	; 1
+  c8:	11 f4       	brne	.+4      	; 0xce <main+0x72>
+	PORTC=0b00000110;
+}
+
+void hright(void)
+{
+	PORTC=0b00001001;
+  ca:	e5 bb       	out	0x15, r30	; 21
+  cc:	d7 cf       	rjmp	.-82     	; 0x7c <main+0x20>
+			
+			else if(x==0b00000000)
+			{
+				if (k==1)	
+					hright();
+				if (k==2)
+  ce:	42 30       	cpi	r20, 0x02	; 2
+  d0:	a9 f6       	brne	.-86     	; 0x7c <main+0x20>
+#include<avr/io.h>
+#include<util/delay.h>
+
+void hleft(void)
+{
+	PORTC=0b00000110;
+  d2:	f5 bb       	out	0x15, r31	; 21
+  d4:	d3 cf       	rjmp	.-90     	; 0x7c <main+0x20>
+
+			
+		}
+
+		
+		if (m==0)	//BLF
+  d6:	00 97       	sbiw	r24, 0x00	; 0
+  d8:	89 f6       	brne	.-94     	; 0x7c <main+0x20>
+
+		{
+			if(x==0b00000101  ) 	
+  da:	25 30       	cpi	r18, 0x05	; 5
+  dc:	11 f4       	brne	.+4      	; 0xe2 <main+0x86>
+	PORTC=0b00001001;
+}
+
+void foreward(void)
+{
+	PORTC=0b00001010;
+  de:	75 bb       	out	0x15, r23	; 21
+  e0:	0b c0       	rjmp	.+22     	; 0xf8 <main+0x9c>
+
+		{
+			if(x==0b00000101  ) 	
+				foreward();
+	
+			else if(x==0b000000001)
+  e2:	21 30       	cpi	r18, 0x01	; 1
+  e4:	11 f0       	breq	.+4      	; 0xea <main+0x8e>
+				left();
+	
+			else if(x==0b00000011)
+  e6:	23 30       	cpi	r18, 0x03	; 3
+  e8:	11 f4       	brne	.+4      	; 0xee <main+0x92>
+	PORTC=0b00001010;
+}
+
+void left(void)
+{
+	PORTC=0b00000010;
+  ea:	65 bb       	out	0x15, r22	; 21
+  ec:	05 c0       	rjmp	.+10     	; 0xf8 <main+0x9c>
+				left();
+	
+			else if(x==0b00000011)
+				left();
+		
+			else if(x==0b000000100)
+  ee:	24 30       	cpi	r18, 0x04	; 4
+  f0:	11 f0       	breq	.+4      	; 0xf6 <main+0x9a>
+				right();
+	
+			else if(x==0b00000110)
+  f2:	26 30       	cpi	r18, 0x06	; 6
+  f4:	09 f4       	brne	.+2      	; 0xf8 <main+0x9c>
+	PORTC=0b00000010;
+}
+
+void right(void)
+{
+	PORTC=0b00001000;
+  f6:	55 bb       	out	0x15, r21	; 21
+				right();
+	
+			else if(x==0b00000110)
+				right();	
+		
+			if(y==0b10000000)	//left sense black turn left
+  f8:	30 38       	cpi	r19, 0x80	; 128
+  fa:	09 f4       	brne	.+2      	; 0xfe <main+0xa2>
+  fc:	bc cf       	rjmp	.-136    	; 0x76 <main+0x1a>
+				k=2;
+
+			else if(y==0b01000000)
+  fe:	30 34       	cpi	r19, 0x40	; 64
+ 100:	11 f4       	brne	.+4      	; 0x106 <main+0xaa>
+ 102:	41 e0       	ldi	r20, 0x01	; 1
+ 104:	b9 cf       	rjmp	.-142    	; 0x78 <main+0x1c>
+				k=1;
+
+			else if(x==0b00000111)
+ 106:	27 30       	cpi	r18, 0x07	; 7
+ 108:	09 f0       	breq	.+2      	; 0x10c <main+0xb0>
+ 10a:	b6 cf       	rjmp	.-148    	; 0x78 <main+0x1c>
+			{
+				if (k==1)	
+ 10c:	41 30       	cpi	r20, 0x01	; 1
+ 10e:	11 f4       	brne	.+4      	; 0x114 <main+0xb8>
+	PORTC=0b00000110;
+}
+
+void hright(void)
+{
+	PORTC=0b00001001;
+ 110:	e5 bb       	out	0x15, r30	; 21
+ 112:	b2 cf       	rjmp	.-156    	; 0x78 <main+0x1c>
+
+			else if(x==0b00000111)
+			{
+				if (k==1)	
+					hright();
+				if (k==2)
+ 114:	42 30       	cpi	r20, 0x02	; 2
+ 116:	09 f0       	breq	.+2      	; 0x11a <main+0xbe>
+ 118:	af cf       	rjmp	.-162    	; 0x78 <main+0x1c>
+#include<avr/io.h>
+#include<util/delay.h>
+
+void hleft(void)
+{
+	PORTC=0b00000110;
+ 11a:	f5 bb       	out	0x15, r31	; 21
+ 11c:	ad cf       	rjmp	.-166    	; 0x78 <main+0x1c>
+ 11e:	42 e0       	ldi	r20, 0x02	; 2
+ 120:	ad cf       	rjmp	.-166    	; 0x7c <main+0x20>
+
+00000122 <_exit>:
+ 122:	f8 94       	cli
+
+00000124 <__stop_program>:
+ 124:	ff cf       	rjmp	.-2      	; 0x124 <__stop_program>
